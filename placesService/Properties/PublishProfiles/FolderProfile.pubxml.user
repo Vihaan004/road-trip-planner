@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\rushi\OneDrive - Arizona State University\Desktop\atiman_a5</_PublishTargetUrl>
+    <History>True|2025-04-21T00:44:17.2206952Z||;True|2025-04-20T17:31:18.3927753-07:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/08/2023 07:09:56</publishTime>
+    </File>
+    <File Include="bin/placesService.dll">
+      <publishTime>04/20/2025 17:44:16</publishTime>
+    </File>
+    <File Include="bin/placesService.pdb">
+      <publishTime>04/20/2025 17:44:16</publishTime>
+    </File>
+    <File Include="Service1.svc">
+      <publishTime>04/19/2025 23:07:34</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/20/2025 17:44:16</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

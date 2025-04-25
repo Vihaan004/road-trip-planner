@@ -1,0 +1,10 @@
+C:\Users\rushi\source\repos\atiman_a5\placesService\bin\placesService.dll.config
+C:\Users\rushi\source\repos\atiman_a5\placesService\bin\placesService.dll
+C:\Users\rushi\source\repos\atiman_a5\placesService\bin\placesService.pdb
+C:\Users\rushi\source\repos\atiman_a5\placesService\bin\Newtonsoft.Json.dll
+C:\Users\rushi\source\repos\atiman_a5\placesService\bin\Newtonsoft.Json.xml
+C:\Users\rushi\source\repos\atiman_a5\placesService\obj\Release\placesService.csproj.AssemblyReference.cache
+C:\Users\rushi\source\repos\atiman_a5\placesService\obj\Release\placesService.csproj.CoreCompileInputs.cache
+C:\Users\rushi\source\repos\atiman_a5\placesService\obj\Release\placesSe.C175DD16.Up2Date
+C:\Users\rushi\source\repos\atiman_a5\placesService\obj\Release\placesService.dll
+C:\Users\rushi\source\repos\atiman_a5\placesService\obj\Release\placesService.pdb
