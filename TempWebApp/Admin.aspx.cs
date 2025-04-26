@@ -13,9 +13,14 @@ namespace TempWebApp
 {
     public partial class Admin : System.Web.UI.Page
     {
-        // XML file path
+        // XML file paths
         private readonly string STAFF_XML_PATH = "Staff.xml";
+        private readonly string POSTS_XML_PATH = "Posts.xml";
+        private readonly string COMMENTS_XML_PATH = "Comments.xml";
+        
+        // XML root elements
         private readonly string XML_ROOT_ELEMENT = "StaffMembers";
+        private readonly string POSTS_ROOT_ELEMENT = "Posts";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,8 +28,13 @@ namespace TempWebApp
             {
                 // Load staff members into the GridView
                 LoadStaffMembers();
+                
+                // Load forum posts into the GridView
+                LoadForumPosts();
             }
         }
+
+        #region Staff Management Methods
 
         /// <summary>
         /// Loads staff members from the XML file into the GridView
@@ -336,5 +346,187 @@ namespace TempWebApp
             pnlMessage.CssClass = isSuccess ? "message success" : "message error";
             lblMessage.Text = message;
         }
+
+        #endregion
+
+        #region Forum Posts Management Methods
+
+        /// <summary>
+        /// Loads forum posts from the XML file into the GridView
+        /// </summary>
+        private void LoadForumPosts()
+        {
+            try
+            {
+                DataTable postsTable = GetForumPostsDataTable();
+                gvPosts.DataSource = postsTable;
+                gvPosts.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Error loading forum posts: " + ex.Message, false);
+            }
+        }
+
+        /// <summary>
+        /// Creates a DataTable from the Posts.xml file
+        /// </summary>
+        /// <returns>DataTable containing forum posts information</returns>
+        private DataTable GetForumPostsDataTable()
+        {
+            DataTable postsTable = new DataTable();
+            postsTable.Columns.Add("PostId", typeof(int));
+            postsTable.Columns.Add("Subject", typeof(string));
+            postsTable.Columns.Add("Description", typeof(string));
+            postsTable.Columns.Add("PostType", typeof(string));
+            postsTable.Columns.Add("UserName", typeof(string));
+            postsTable.Columns.Add("PostDate", typeof(DateTime));
+
+            string xmlFilePath = Path.Combine(Server.MapPath("~/App_Data"), POSTS_XML_PATH);
+            
+            if (!File.Exists(xmlFilePath))
+            {
+                return postsTable; // Return empty table if file doesn't exist
+            }
+
+            try
+            {
+                XDocument doc = XDocument.Load(xmlFilePath);
+                var posts = doc.Root?.Elements("Post");
+
+                if (posts != null)
+                {
+                    foreach (var post in posts)
+                    {
+                        int postId = int.Parse(post.Element("PostId").Value);
+                        string subject = post.Element("Subject")?.Value ?? string.Empty;
+                        string description = post.Element("Description")?.Value ?? string.Empty;
+                        string postType = post.Element("PostType")?.Value ?? string.Empty;
+                        string userName = post.Element("UserName")?.Value ?? string.Empty;
+                        DateTime postDate = DateTime.Parse(post.Element("PostDate").Value);
+                        
+                        postsTable.Rows.Add(postId, subject, description, postType, userName, postDate);
+                    }
+                }
+            }
+            catch
+            {
+                // If there's an error loading the XML file, return the empty table
+            }
+
+            return postsTable;
+        }
+
+        /// <summary>
+        /// Handles the RowCommand event for the posts GridView
+        /// </summary>
+        protected void gvPosts_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Delete")
+            {
+                int postId = Convert.ToInt32(e.CommandArgument);
+                if (DeleteForumPost(postId))
+                {
+                    ShowMessage("Forum post deleted successfully", true);
+                    LoadForumPosts();
+                }
+                else
+                {
+                    ShowMessage("Error deleting forum post", false);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the RowDeleting event for the posts GridView
+        /// </summary>
+        protected void gvPosts_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            // This method is required for the Delete command to work
+            // The actual deletion is handled in gvPosts_RowCommand
+        }
+
+        /// <summary>
+        /// Deletes a forum post from the XML file and any associated comments
+        /// </summary>
+        /// <param name="postId">The ID of the post to delete</param>
+        /// <returns>True if successful, false otherwise</returns>
+        private bool DeleteForumPost(int postId)
+        {
+            try
+            {
+                // Delete post from Posts.xml
+                string postsXmlFilePath = Path.Combine(Server.MapPath("~/App_Data"), POSTS_XML_PATH);
+                
+                if (!File.Exists(postsXmlFilePath))
+                {
+                    ShowMessage("Posts file not found", false);
+                    return false;
+                }
+
+                XDocument postsDoc = XDocument.Load(postsXmlFilePath);
+                var post = postsDoc.Root?.Elements("Post")
+                    .FirstOrDefault(p => int.Parse(p.Element("PostId").Value) == postId);
+                
+                if (post != null)
+                {
+                    post.Remove();
+                    postsDoc.Save(postsXmlFilePath);
+                    
+                    // Also delete any associated comments
+                    DeleteCommentsForPost(postId);
+                    
+                    return true;
+                }
+                else
+                {
+                    ShowMessage("Post not found", false);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("Error deleting post: " + ex.Message, false);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Deletes all comments associated with a post
+        /// </summary>
+        /// <param name="postId">The ID of the post</param>
+        private void DeleteCommentsForPost(int postId)
+        {
+            try
+            {
+                string commentsXmlFilePath = Path.Combine(Server.MapPath("~/App_Data"), COMMENTS_XML_PATH);
+                
+                if (!File.Exists(commentsXmlFilePath))
+                {
+                    return;
+                }
+
+                XDocument commentsDoc = XDocument.Load(commentsXmlFilePath);
+                var comments = commentsDoc.Root?.Elements("Comment")
+                    .Where(c => int.Parse(c.Element("PostId").Value) == postId)
+                    .ToList();
+                
+                if (comments != null && comments.Any())
+                {
+                    foreach (var comment in comments)
+                    {
+                        comment.Remove();
+                    }
+                    
+                    commentsDoc.Save(commentsXmlFilePath);
+                }
+            }
+            catch
+            {
+                // Ignore errors when deleting comments
+            }
+        }
+
+        #endregion
     }
 }

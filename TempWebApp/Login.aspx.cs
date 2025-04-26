@@ -17,6 +17,10 @@ namespace TempWebApp
         // Constants for XML file paths
         private readonly string MEMBER_XML_PATH = "Member.xml";
         private readonly string STAFF_XML_PATH = "Staff.xml";
+        
+        // Session key constants
+        private const string SESSION_USER_TYPE = "UserType";
+        private const string SESSION_USERNAME = "Username";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -197,6 +201,10 @@ namespace TempWebApp
             lastLoginCookie.Value = currentLoginTime.ToString("o"); // ISO 8601 format
             lastLoginCookie.Expires = DateTime.Now.AddDays(30); // Expires in 30 days
             Response.Cookies.Add(lastLoginCookie);
+            
+            // Add session variables to ensure proper redirection
+            Session[SESSION_USERNAME] = username;
+            Session[SESSION_USER_TYPE] = userType;
         }
 
         private void HandleRememberMe(string username, string password)

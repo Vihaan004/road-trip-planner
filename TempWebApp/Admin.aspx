@@ -204,5 +204,38 @@
                 </asp:GridView>
             </div>
         </div>
+
+        <!-- Forum Posts List -->
+        <div class="admin-card">
+            <div class="admin-card-title">Posts Management</div>
+            <div class="grid-container">
+                <asp:GridView ID="gvPosts" runat="server" 
+                    AutoGenerateColumns="False" 
+                    CssClass="staff-grid" 
+                    OnRowCommand="gvPosts_RowCommand" 
+                    OnRowDeleting="gvPosts_RowDeleting"
+                    DataKeyNames="PostId">
+                    <Columns>
+                        <asp:BoundField DataField="PostId" HeaderText="ID" />
+                        <asp:BoundField DataField="Subject" HeaderText="Title" />
+                        <asp:BoundField DataField="PostType" HeaderText="Type" />
+                        <asp:BoundField DataField="UserName" HeaderText="Posted By" />
+                        <asp:BoundField DataField="PostDate" HeaderText="Date Posted" DataFormatString="{0:MM/dd/yyyy}" />
+                        <asp:TemplateField HeaderText="Actions">
+                            <ItemTemplate>
+                                <asp:Button ID="btnDelete" runat="server" Text="Delete" 
+                                    CommandName="Delete" 
+                                    CommandArgument='<%# Eval("PostId") %>' 
+                                    CssClass="btn-delete"
+                                    OnClientClick="return confirm('Are you sure you want to delete this post? This action cannot be undone.');" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <EmptyDataTemplate>
+                        <div class="text-center p-3">No posts found.</div>
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </div>
+        </div>
     </div>
 </asp:Content>
