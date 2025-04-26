@@ -54,6 +54,23 @@
         .btn-primary:hover {
             background: #0b5ed7;
         }
+        .btn-success {
+            background: #198754; /* Bootstrap success green */
+            border: none;
+            padding: 0.6rem 1rem;
+        }
+        .btn-success:hover {
+            background: #157347;
+        }
+        .btn-dark {
+            background: #212529; /* Bootstrap dark */
+            border: none;
+            padding: 0.6rem 1rem;
+            margin-top: 20px;
+        }
+        .btn-dark:hover {
+            background: #424649;
+        }
         .status-message {
             min-height: 24px; /* Reserve space for messages */
             margin-top: 1rem;
@@ -65,6 +82,19 @@
         }
         .status-error {
             color: red;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .account-type-selector {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .admin-link {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 
@@ -83,7 +113,7 @@
     <div class="main-hero">
         <div class="row justify-content-center g-4">
             <!-- Login Form Panel -->
-            <asp:Panel ID="LoginPanel" runat="server" DefaultButton="btnLogin" CssClass="col-md-6 col-lg-5">
+            <asp:Panel ID="LoginPanel" runat="server" DefaultButton="btnMemberLogin" CssClass="col-md-6 col-lg-5">
                 <div class="form-container">
                     <div class="form-title">Login</div>
                     <div class="mb-3">
@@ -98,8 +128,9 @@
                         <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="form-check-input" />
                         <asp:Label ID="lblRememberMe" runat="server" Text="Remember Me" AssociatedControlID="chkRememberMe" CssClass="form-check-label"></asp:Label>
                     </div>
-                    <div class="d-grid">
-                        <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" CssClass="btn btn-primary" ValidationGroup="LoginGroup" />
+                    <div class="btn-group d-grid">
+                        <asp:Button ID="btnMemberLogin" runat="server" Text="Member Login" OnClick="btnMemberLogin_Click" CssClass="btn btn-primary" ValidationGroup="LoginGroup" />
+                        <asp:Button ID="btnStaffLogin" runat="server" Text="Staff Login" OnClick="btnStaffLogin_Click" CssClass="btn btn-success" ValidationGroup="LoginGroup" />
                     </div>
                     <div class="status-message">
                         <asp:Label ID="lblLoginStatus" runat="server"></asp:Label>
@@ -108,7 +139,7 @@
             </asp:Panel>
 
             <!-- Sign Up Form Panel -->
-            <asp:Panel ID="SignUpPanel" runat="server" DefaultButton="btnSignUp" CssClass="col-md-6 col-lg-5">
+            <asp:Panel ID="SignUpPanel" runat="server" DefaultButton="btnMemberSignUp" CssClass="col-md-6 col-lg-5">
                 <div class="form-container">
                     <div class="form-title">Sign Up</div>
                     <div class="mb-3">
@@ -122,15 +153,30 @@
                     <div class="mb-3">
                         <asp:Label ID="lblConfirmPassword" runat="server" Text="Confirm Password" AssociatedControlID="txtConfirmPassword" CssClass="form-label"></asp:Label>
                         <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" CssClass="form-control" ValidationGroup="SignUpGroup" autocomplete="new-password"></asp:TextBox>
+                        <asp:CompareValidator ID="CompareValidator1" runat="server" 
+                            ControlToCompare="txtSignUpPassword" 
+                            ControlToValidate="txtConfirmPassword"
+                            ErrorMessage="Passwords must match" 
+                            CssClass="text-danger" 
+                            Display="Dynamic"
+                            ValidationGroup="SignUpGroup">
+                        </asp:CompareValidator>
                     </div>
                     <div class="d-grid">
-                        <asp:Button ID="btnSignUp" runat="server" Text="Sign Up" OnClick="btnSignUp_Click" CssClass="btn btn-primary" ValidationGroup="SignUpGroup" />
+                        <asp:Button ID="btnMemberSignUp" runat="server" Text="Member Sign Up" OnClick="btnMemberSignUp_Click" CssClass="btn btn-primary" ValidationGroup="SignUpGroup" />
                     </div>
                     <div class="status-message">
                         <asp:Label ID="lblSignUpStatus" runat="server"></asp:Label>
                     </div>
                 </div>
             </asp:Panel>
+        </div>
+        
+        <!-- Administrator Link -->
+        <div class="admin-link">
+            <asp:HyperLink ID="hlAdministrator" runat="server" NavigateUrl="~/Admin.aspx" CssClass="btn btn-dark">
+                Administrator
+            </asp:HyperLink>
         </div>
     </div>
 </asp:Content>
