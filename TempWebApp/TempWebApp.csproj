@@ -341,6 +341,12 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DistanceMatrixService\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PasswordHashLibrary\PasswordHashLibrary.csproj">
+      <Project>{d96cb162-4874-443e-be3a-d1d9596c2f65}</Project>
+      <Name>PasswordHashLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

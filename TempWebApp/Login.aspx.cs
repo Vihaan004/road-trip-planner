@@ -8,6 +8,7 @@ using System.Xml.Linq; // Added for XML handling
 using System.IO; // Added for Path
 using System.Text; // For building error messages
 using System.Web.Security; // For Forms Authentication
+using PasswordHashLibrary; // Added for password hashing
 
 namespace TempWebApp
 {
@@ -51,10 +52,16 @@ namespace TempWebApp
             {
                 errors.Add("Username must be at least 2 characters.");
             }
+            
             if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
             {
                 errors.Add("Password must be at least 8 characters.");
             }
+            else if (!PasswordHasher.ValidatePassword(password))
+            {
+                errors.Add("Password must contain at least one letter and one number.");
+            }
+            
             if (confirmPassword != null)
             {
                 if (string.IsNullOrWhiteSpace(confirmPassword))
@@ -131,10 +138,10 @@ namespace TempWebApp
                     if (user != null)
                     {
                         string storedPasswordHash = user.Element("Password")?.Value;
-
-                        // TODO: Replace with actual password verification
-                        // Example: if (PasswordHashLibrary.Class1.VerifyHash(password, storedPasswordHash))
-                        if (password == storedPasswordHash) // Placeholder - REPLACE THIS
+                        
+                        // Hash the provided password and compare with stored hash
+                        string inputPasswordHash = PasswordHasher.HashPassword(password);
+                        if (inputPasswordHash == storedPasswordHash) 
                         {
                             isAuthenticated = true;
                         }
@@ -312,14 +319,13 @@ namespace TempWebApp
                     }
                 }
 
-                // TODO: Hash the password using PasswordHashLibrary
-                string hashedPassword = password; // Placeholder - REPLACE THIS WITH ACTUAL HASH
+                // Hash the password using PasswordHashLibrary
+                string hashedPassword = PasswordHasher.HashPassword(password);
 
                 // Add the new user to the XML file
                 XElement newUser = new XElement("Member",
                     new XElement("Username", username),
-                    new XElement("Password", hashedPassword),
-                    new XElement("CreatedDate", DateTime.Now.ToString("o"))
+                    new XElement("Password", hashedPassword)
                 );
                 doc.Root.Add(newUser);
                 doc.Save(xmlFilePath);

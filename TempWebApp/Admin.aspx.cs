@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using System.IO;
 using System.Data;
+using PasswordHashLibrary; // Added for password hashing
 
 namespace TempWebApp
 {
@@ -115,6 +116,13 @@ namespace TempWebApp
                 return;
             }
 
+            // Password validation using PasswordHashLibrary
+            if (password.Length < 8 || !PasswordHasher.ValidatePassword(password))
+            {
+                ShowMessage("Password must be at least 8 characters long and contain both letters and numbers", false);
+                return;
+            }
+
             // Check if the username already exists in Staff.xml
             if (StaffUsernameExists(username))
             {
@@ -149,7 +157,7 @@ namespace TempWebApp
         /// Adds a new staff member to the XML file
         /// </summary>
         /// <param name="username">The username</param>
-        /// <param name="password">The password (should be hashed in production)</param>
+        /// <param name="password">The password (will be hashed before storing)</param>
         /// <returns>True if successful, false otherwise</returns>
         private bool AddStaffMember(string username, string password)
         {
@@ -163,8 +171,8 @@ namespace TempWebApp
                 // Load XML document
                 XDocument doc = XDocument.Load(xmlFilePath);
 
-                // TODO: Hash the password using a secure method (like PasswordHashLibrary)
-                string hashedPassword = password; // Replace with actual hashing
+                // Hash the password using PasswordHashLibrary
+                string hashedPassword = PasswordHasher.HashPassword(password);
 
                 // Create new staff element
                 XElement newStaff = new XElement("Staff",
