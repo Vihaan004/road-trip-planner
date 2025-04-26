@@ -121,6 +121,26 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Places Service</td>
+                                <td>WCF Service</td>
+                                <td>getPlaces<br />findPlaceDetails</td>
+                                <td>string location, string type</td>
+                                <td>Finds nearby points of interest based on location and category using Google Places API.</td>
+                                <td>
+                                    <asp:Button ID="btnTryPlaces" runat="server" Text="Try It" CssClass="btn try-button" OnClick="btnTryPlaces_Click" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Password Hashing</td>
+                                <td>Class Library</td>
+                                <td>HashPassword<br />ValidatePassword</td>
+                                <td>string password</td>
+                                <td>Securely hashes passwords using SHA-256 for secure credential storage.</td>
+                                <td>
+                                    <asp:Button ID="btnTryHashing" runat="server" Text="Try It" CssClass="btn try-button" OnClick="btnTryHashing_Click" />
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>User Credentials</td>
                                 <td>Data storage (XML)</td>
                                 <td>Store/fetch credentials</td>

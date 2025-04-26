@@ -14,5 +14,17 @@ namespace TempWebApp
             // Navigate to the DistanceMatrix.aspx page
             Response.Redirect("~/DistanceMatrix.aspx");
         }
+        
+        protected void btnTryPlaces_Click(object sender, EventArgs e)
+        {
+            // Navigate to the Places.aspx page (renamed from PlacesService.aspx)
+            Response.Redirect("~/Places.aspx");
+        }
+        
+        protected void btnTryHashing_Click(object sender, EventArgs e)
+        {
+            // Navigate to the Hashing.aspx page
+            Response.Redirect("~/Hashing.aspx");
+        }
     }
 }

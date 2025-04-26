@@ -137,7 +137,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\DistanceMatrixService\Service1.disco" />
     <None Include="Connected Services\DistanceMatrixService\configuration91.svcinfo" />
     <None Include="Connected Services\DistanceMatrixService\configuration.svcinfo" />
     <None Include="Connected Services\DistanceMatrixService\Reference.svcmap">
@@ -145,6 +144,13 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Admin.aspx" />
+    <None Include="Connected Services\DistanceMatrixService\Service11.wsdl" />
+    <None Include="Connected Services\PlacesService\configuration91.svcinfo" />
+    <None Include="Connected Services\PlacesService\configuration.svcinfo" />
+    <None Include="Connected Services\PlacesService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -166,8 +172,10 @@
     <Content Include="DistanceMatrix.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Hashing.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Places.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -196,13 +204,10 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Connected Services\DistanceMatrixService\Service1.wsdl" />
-    <None Include="Connected Services\DistanceMatrixService\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\DistanceMatrixService\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="Connected Services\PlacesService\TempWebApp.PlacesService.PlaceResults.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\PlacesService\Service11.wsdl" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -251,6 +256,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PlacesService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -268,6 +278,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hashing.aspx.cs">
+      <DependentUpon>Hashing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hashing.aspx.designer.cs">
+      <DependentUpon>Hashing.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -281,6 +298,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Places.aspx.cs">
+      <DependentUpon>Places.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Places.aspx.designer.cs">
+      <DependentUpon>Places.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceDirectory.aspx.cs">
@@ -340,6 +364,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DistanceMatrixService\" />
+    <WCFMetadataStorage Include="Connected Services\PlacesService\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PasswordHashLibrary\PasswordHashLibrary.csproj">
