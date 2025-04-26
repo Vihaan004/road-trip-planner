@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="0561cb7a-e565-41bc-a7d4-26bbfb23e240" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="bb51324f-8d0b-4285-ab49-edbc163eccb0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,10 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:49747/Service1.svc?singleWsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://webstrar75.fulton.asu.edu/Page10/Service1.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service11.wsdl" MetadataType="Wsdl" ID="1cfdeb42-cb14-4c9a-84d1-268a405c26b9" SourceId="1" SourceUrl="http://localhost:49747/Service1.svc?singleWsdl" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="e86cb26c-c94e-482b-9245-37a42934ef97" SourceId="1" SourceUrl="http://webstrar75.fulton.asu.edu/Page10/Service1.svc?wsdl" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="51f2ecf8-56c3-455a-945e-260d3dd10bc3" SourceId="1" SourceUrl="http://webstrar75.fulton.asu.edu/Page10/Service1.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="ac775993-ca0f-4886-a6cf-dc6f63adeff9" SourceId="1" SourceUrl="http://webstrar75.fulton.asu.edu/Page10/Service1.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="cc114e8c-48a2-4a17-af14-dd10085fa029" SourceId="1" SourceUrl="http://webstrar75.fulton.asu.edu/Page10/Service1.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

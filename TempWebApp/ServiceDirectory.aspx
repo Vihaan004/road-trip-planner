@@ -101,6 +101,7 @@
                     <table class="table table-hover service-table">
                         <thead>
                             <tr>
+                                <th scope="col">Developer</th>
                                 <th scope="col">Component</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Operations</th>
@@ -111,6 +112,7 @@
                         </thead>
                         <tbody>
                             <tr>
+                                <td>Vihaan Patel</td>
                                 <td>Distance Matrix Service</td>
                                 <td>WCF Service</td>
                                 <td>getDistance<br />getTime</td>
@@ -121,6 +123,7 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Atiman Rohatgi</td>
                                 <td>Places Service</td>
                                 <td>WCF Service</td>
                                 <td>getPlaces<br />findPlaceDetails</td>
@@ -131,6 +134,7 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Atiman Rohatgi</td>
                                 <td>Password Hashing</td>
                                 <td>Class Library</td>
                                 <td>HashPassword<br />ValidatePassword</td>
@@ -141,14 +145,34 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>User Credentials</td>
-                                <td>Data storage (XML)</td>
-                                <td>Store/fetch credentials</td>
-                                <td>-</td>
-                                <td>Stores usernames and passwords to maintain a user database</td>
+                                <td>Aryan Yeole</td>
+                                <td>Weather Service</td>
+                                <td>WCF Service</td>
+                                <td>getWeather</td>
+                                <td>string city</td>
+                                <td>Fetch weather data for a specific city along the planned route.</td>
                                 <td>-</td>
                             </tr>
                             <tr>
+                                <td>Vihaan Patel</td>
+                                <td>User Authentication</td>
+                                <td>Data storage (XML)</td>
+                                <td>Store/fetch credentials</td>
+                                <td>-</td>
+                                <td>Stores usernames and passwords to maintain a user database.</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Aryan Yeole</td>
+                                <td>Captcha</td>
+                                <td>Authentication</td>
+                                <td>Verify Human User</td>
+                                <td>-</td>
+                                <td>Utilize Captcha service for human authentication at login.</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Vihaan Patel</td>
                                 <td>Client Storage</td>
                                 <td>HTTP Cookie</td>
                                 <td>Remember Me</td>
@@ -157,11 +181,39 @@
                                 <td>-</td>
                             </tr>
                             <tr>
+                                <td>Vihaan Patel</td>
+                                <td>Posts Database</td>
+                                <td>Data storage (XML)</td>
+                                <td>Store/fetch forum posts</td>
+                                <td>-</td>
+                                <td>Stores forum posts and comments data for the road trip community section.</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Vihaan Patel</td>
                                 <td>Bootstrap UI</td>
                                 <td>CSS Framework</td>
                                 <td>User Interface</td>
                                 <td>-</td>
-                                <td>Consistent web app layout and design using Bootstrap 5.3</td>
+                                <td>Consistent web app layout and design using Bootstrap 5.3.</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Aryan Yeole</td>
+                                <td>Broswer Location</td>
+                                <td>App Permission</td>
+                                <td>Fetch User Location</td>
+                                <td>-</td>
+                                <td>Obtains the location of website access to utilize for planning a road trip.</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Atiman Rohatgi</td>
+                                <td>Visitor Counter</td>
+                                <td>Session Counter</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>Tracks the number of visits to the default landing page.</td>
                                 <td>-</td>
                             </tr>
                         </tbody>
