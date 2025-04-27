@@ -8,4 +8,12 @@
     <UserName>testing</UserName>
     <PostDate>2025-04-26T11:06:10.6818268</PostDate>
   </Post>
+  <Post>
+    <PostId>2</PostId>
+    <Subject>regd. snow</Subject>
+    <Description>there is too much snow.</Description>
+    <PostType>Tip</PostType>
+    <UserName>atomr</UserName>
+    <PostDate>2025-04-27T15:54:41.1125384</PostDate>
+  </Post>
 </Posts>

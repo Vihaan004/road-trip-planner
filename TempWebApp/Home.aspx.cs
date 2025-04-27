@@ -195,7 +195,6 @@ namespace TempWebApp
             }
 
             string stopCity = stops[stopIndex];
-            
             try
             {
                 // Call the Places Service
@@ -208,63 +207,31 @@ namespace TempWebApp
                 {
                     resultsDiv.Controls.Clear();
 
-                    // Create restaurants section
-                    HtmlGenericControl restaurantsSection = new HtmlGenericControl("div");
-                    restaurantsSection.Attributes["class"] = "mb-3";
-                    HtmlGenericControl restaurantsTitle = new HtmlGenericControl("h6");
-                    restaurantsTitle.InnerText = "Restaurants";
-                    restaurantsSection.Controls.Add(restaurantsTitle);
-
-                    HtmlGenericControl restaurantsList = new HtmlGenericControl("ul");
-                    if (results.Restaurants != null && results.Restaurants.Length > 0)
-                    {
-                        foreach (string restaurant in results.Restaurants)
-                        {
-                            HtmlGenericControl item = new HtmlGenericControl("li");
-                            item.InnerText = restaurant;
-                            restaurantsList.Controls.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        HtmlGenericControl item = new HtmlGenericControl("li");
-                        item.InnerText = "No restaurants found.";
-                        restaurantsList.Controls.Add(item);
-                    }
-                    restaurantsSection.Controls.Add(restaurantsList);
-                    resultsDiv.Controls.Add(restaurantsSection);
-
-                    // Create petrol pumps section
-                    HtmlGenericControl petrolSection = new HtmlGenericControl("div");
-                    petrolSection.Attributes["class"] = "mb-3";
-                    HtmlGenericControl petrolTitle = new HtmlGenericControl("h6");
-                    petrolTitle.InnerText = "Gas Stations";
-                    petrolSection.Controls.Add(petrolTitle);
-
-                    HtmlGenericControl petrolList = new HtmlGenericControl("ul");
-                    if (results.PetrolPumps != null && results.PetrolPumps.Length > 0)
-                    {
-                        foreach (string pump in results.PetrolPumps)
-                        {
-                            HtmlGenericControl item = new HtmlGenericControl("li");
-                            item.InnerText = pump;
-                            petrolList.Controls.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        HtmlGenericControl item = new HtmlGenericControl("li");
-                        item.InnerText = "No gas stations found.";
-                        petrolList.Controls.Add(item);
-                    }
-                    petrolSection.Controls.Add(petrolList);
-                    resultsDiv.Controls.Add(petrolSection);
-
+                    // Display only the nearest petrol pump with better styling
+                    string nearestPump = (results.PetrolPumps != null && results.PetrolPumps.Length > 0)
+                        ? results.PetrolPumps[0]
+                        : "No gas stations found.";
+                        
+                    HtmlGenericControl pumpContainer = new HtmlGenericControl("div");
+                    pumpContainer.Attributes["class"] = "alert alert-info mt-2";
+                    pumpContainer.Attributes["style"] = "padding: 10px; margin-top: 5px;";
+                    
+                    HtmlGenericControl pumpTitle = new HtmlGenericControl("div");
+                    pumpTitle.Attributes["class"] = "fw-bold";
+                    pumpTitle.InnerHtml = "Nearest Gas Station:";
+                    pumpContainer.Controls.Add(pumpTitle);
+                    
+                    HtmlGenericControl pumpName = new HtmlGenericControl("div");
+                    pumpName.InnerHtml = nearestPump;
+                    pumpContainer.Controls.Add(pumpName);
+                    
+                    resultsDiv.Controls.Add(pumpContainer);
+                    
                     // Make the results visible
                     resultsDiv.Style["display"] = "block";
                 }
 
-                // JavaScript to toggle visibility after AJAX postback
+                // JavaScript to toggle visibility after postback
                 ScriptManager.RegisterStartupScript(this, GetType(), $"showPlaces_{stopIndex}",
                     $"document.getElementById('placesResults_{stopIndex}').style.display = 'block';", true);
             }
@@ -277,71 +244,24 @@ namespace TempWebApp
 
         protected void RemoveStop(object sender, EventArgs e)
         {
-            try
-            {
-                Button btn = (Button)sender;
-                int stopIndex = Convert.ToInt32(btn.CommandArgument);
-                var stops = GetRouteStops();
+            Button btn = (Button)sender;
+            int stopIndex = Convert.ToInt32(btn.CommandArgument);
 
-                // Make sure we don't remove origin or destination
-                if (stopIndex <= 0 || stopIndex >= stops.Count - 1)
-                {
-                    return;
-                }
+            var stops = GetRouteStops();
+            // Only remove intermediate stops
+            if (stopIndex <= 0 || stopIndex >= stops.Count - 1)
+                return;
 
-                // Store stops for later use
-                string previousStop = stops[stopIndex - 1];
-                string currentStop = stops[stopIndex];
-                string nextStop = stops[stopIndex + 1];
+            // Remove the stop from list
+            stops.RemoveAt(stopIndex);
+            Session[SESSION_ROUTE_STOPS] = stops;
 
-                // Remove the stop
-                stops.RemoveAt(stopIndex);
-                Session[SESSION_ROUTE_STOPS] = stops;
+            // Clear all route details and recalculate
+            Session[SESSION_ROUTE_DETAILS] = new Dictionary<string, RouteDetail>();
+            RecalculateEntireRoute();
 
-                // Get route details dictionary and make a working copy to avoid modifying during iteration
-                var routeDetails = GetRouteDetails();
-                var updatedRouteDetails = new Dictionary<string, RouteDetail>(routeDetails);
-
-                // Remove entries involving the removed stop
-                string key1 = $"{previousStop}-{currentStop}";
-                string key2 = $"{currentStop}-{nextStop}";
-                
-                if (updatedRouteDetails.ContainsKey(key1))
-                {
-                    updatedRouteDetails.Remove(key1);
-                }
-                
-                if (updatedRouteDetails.ContainsKey(key2))
-                {
-                    updatedRouteDetails.Remove(key2);
-                }
-                
-                // Save the updated route details
-                Session[SESSION_ROUTE_DETAILS] = updatedRouteDetails;
-
-                // Calculate the new direct connection between previous and next stops
-                try
-                {
-                    CalculateRouteDetail(previousStop, nextStop);
-                }
-                catch (Exception ex)
-                {
-                    // Log the error but continue - the route should still display without this segment
-                    System.Diagnostics.Debug.WriteLine($"Error calculating new route segment: {ex.Message}");
-                }
-
-                // Always display the route, even if some calculations failed
-                DisplayRoute();
-            }
-            catch (Exception ex)
-            {
-                // Show error but ensure route is still displayed
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert",
-                    $"alert('Error removing stop: {ex.Message}');", true);
-                
-                // Force the route to display regardless of error
-                DisplayRoute();
-            }
+            // Update UI
+            DisplayRoute();
         }
 
         private void DisplayRoute()
@@ -362,7 +282,6 @@ namespace TempWebApp
 
             var routeDetails = GetRouteDetails();
             double totalDistance = 0;
-            int totalMinutes = 0;
 
             // Add each stop to the UI
             for (int i = 0; i < stops.Count; i++)
@@ -386,7 +305,6 @@ namespace TempWebApp
                     if (routeDetails.TryGetValue(routeKey, out RouteDetail detail))
                     {
                         totalDistance += detail.DistanceMiles;
-                        totalMinutes += detail.TimeMinutes;
 
                         HtmlGenericControl legInfo = new HtmlGenericControl("div");
                         legInfo.Attributes["class"] = "leg-info";
@@ -412,52 +330,12 @@ namespace TempWebApp
                     buttonDiv.Controls.Add(removeBtn);
                 }
 
-                // Add "Places Nearby" button for all stops
-                Button placesBtn = new Button();
-                placesBtn.Text = "Places Nearby";
-                placesBtn.CssClass = "btn btn-sm btn-outline-primary";
-                placesBtn.CommandArgument = i.ToString();
-                placesBtn.OnClientClick = $"togglePlacesResults({i}); return false;";
-                placesBtn.Click += GetPlacesForStop;
-                buttonDiv.Controls.Add(placesBtn);
-
                 stopDiv.Controls.Add(buttonDiv);
                 routeContainer.Controls.Add(stopDiv);
-
-                // Add a container for places results
-                HtmlGenericControl placesResults = new HtmlGenericControl("div");
-                placesResults.ID = $"placesResults_{i}";
-                placesResults.Attributes["class"] = "places-results";
-                placesResults.Style["display"] = "none";
-                routeContainer.Controls.Add(placesResults);
             }
 
-            // Update total distance and time
+            // Update total distance only
             lblTotalDistance.Text = $"{totalDistance:F2} miles";
-            
-            // Format the total time
-            string formattedTime;
-            if (totalMinutes < 60)
-            {
-                formattedTime = $"{totalMinutes} minute{(totalMinutes != 1 ? "s" : "")}";
-            }
-            else
-            {
-                int hours = totalMinutes / 60;
-                int minutes = totalMinutes % 60;
-                
-                if (minutes == 0)
-                {
-                    // Only show hours if there are no minutes
-                    formattedTime = $"{hours} hour{(hours != 1 ? "s" : "")}";
-                }
-                else
-                {
-                    // Show both hours and minutes
-                    formattedTime = $"{hours} hour{(hours != 1 ? "s" : "")} {minutes} minute{(minutes != 1 ? "s" : "")}";
-                }
-            }
-            lblTotalTime.Text = formattedTime;
         }
 
         private void RecalculateEntireRoute()
@@ -986,6 +864,64 @@ namespace TempWebApp
             
             // Redirect to login page
             Response.Redirect("~/Login.aspx");
+        }
+
+        protected void btnSearchPlaces_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtLocation.Text))
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", 
+                    "alert('Please enter a location to search for nearby places.');", true);
+                return;
+            }
+
+            try
+            {
+                // Create an instance of the Places Service client
+                TempWebApp.PlacesService.Service1Client placesService = new TempWebApp.PlacesService.Service1Client();
+
+                // Call the SearchNearby method with the location entered by the user
+                TempWebApp.PlacesService.PlaceResults results = placesService.SearchNearby(txtLocation.Text);
+
+                // Clear any existing items in the lists
+                lstGasStations.Items.Clear();
+                lstRestaurants.Items.Clear();
+
+                // Add gas stations to the list
+                if (results.PetrolPumps != null && results.PetrolPumps.Length > 0)
+                {
+                    foreach (string pump in results.PetrolPumps)
+                    {
+                        lstGasStations.Items.Add(pump);
+                    }
+                }
+                else
+                {
+                    lstGasStations.Items.Add("No gas stations found nearby.");
+                }
+
+                // Add restaurants to the list
+                if (results.Restaurants != null && results.Restaurants.Length > 0)
+                {
+                    foreach (string restaurant in results.Restaurants)
+                    {
+                        lstRestaurants.Items.Add(restaurant);
+                    }
+                }
+                else
+                {
+                    lstRestaurants.Items.Add("No restaurants found nearby.");
+                }
+
+                // Make the results panel visible
+                pnlPlacesResults.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                // Display error message
+                ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", 
+                    $"alert('Error finding nearby places: {ex.Message}');", true);
+            }
         }
     }
 
