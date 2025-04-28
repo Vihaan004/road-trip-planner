@@ -7,10 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TempWebApp {
-    
-    public partial class Home {
-        
+namespace TempWebApp
+{
+
+
+    public partial class Home
+    {
+
         /// <summary>
         /// lblUserName control.
         /// </summary>
@@ -19,7 +22,16 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUserName;
-        
+
+        /// <summary>
+        /// lnkLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkLogout;
+
         /// <summary>
         /// txtOrigin control.
         /// </summary>
@@ -28,7 +40,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOrigin;
-        
+
         /// <summary>
         /// txtDestination control.
         /// </summary>
@@ -37,7 +49,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDestination;
-        
+
         /// <summary>
         /// btnCreateRoute control.
         /// </summary>
@@ -46,7 +58,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCreateRoute;
-        
+
         /// <summary>
         /// txtNewStop control.
         /// </summary>
@@ -55,7 +67,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewStop;
-        
+
         /// <summary>
         /// btnAddStop control.
         /// </summary>
@@ -64,7 +76,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddStop;
-        
+
         /// <summary>
         /// pnlRouteInfo control.
         /// </summary>
@@ -73,7 +85,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlRouteInfo;
-        
+
         /// <summary>
         /// lblTotalDistance control.
         /// </summary>
@@ -82,16 +94,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalDistance;
-        
-        /// <summary>
-        /// lblTotalTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTotalTime;
-        
+
         /// <summary>
         /// routeContainer control.
         /// </summary>
@@ -100,7 +103,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl routeContainer;
-        
+
         /// <summary>
         /// pnlNoRoute control.
         /// </summary>
@@ -109,7 +112,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNoRoute;
-        
+
         /// <summary>
         /// btnNewPost control.
         /// </summary>
@@ -118,7 +121,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNewPost;
-        
+
         /// <summary>
         /// pnlNewPost control.
         /// </summary>
@@ -127,7 +130,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNewPost;
-        
+
         /// <summary>
         /// txtPostSubject control.
         /// </summary>
@@ -136,7 +139,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPostSubject;
-        
+
         /// <summary>
         /// txtPostDescription control.
         /// </summary>
@@ -145,7 +148,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPostDescription;
-        
+
         /// <summary>
         /// ddlPostType control.
         /// </summary>
@@ -154,7 +157,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPostType;
-        
+
         /// <summary>
         /// btnSubmitPost control.
         /// </summary>
@@ -163,7 +166,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmitPost;
-        
+
         /// <summary>
         /// btnCancelPost control.
         /// </summary>
@@ -172,7 +175,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelPost;
-        
+
         /// <summary>
         /// rptPosts control.
         /// </summary>
@@ -181,7 +184,7 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPosts;
-        
+
         /// <summary>
         /// pnlNoPosts control.
         /// </summary>
@@ -190,14 +193,50 @@ namespace TempWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNoPosts;
-        
+
         /// <summary>
-        /// btnReorderStops control.
+        /// txtLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReorderStops;
+        protected global::System.Web.UI.WebControls.TextBox txtLocation;
+
+        /// <summary>
+        /// btnSearchPlaces control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearchPlaces;
+
+        /// <summary>
+        /// pnlPlacesResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPlacesResults;
+
+        /// <summary>
+        /// lstGasStations control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList lstGasStations;
+
+        /// <summary>
+        /// lstRestaurants control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList lstRestaurants;
     }
 }

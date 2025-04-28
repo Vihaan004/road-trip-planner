@@ -151,7 +151,9 @@
                                 <td>getWeather</td>
                                 <td>string city</td>
                                 <td>Fetch weather data for a specific city along the planned route.</td>
-                                <td>-</td>
+                                <td>
+                                    <asp:Button ID="btnTryWeather" runat="server" Text="Try It" CssClass="btn try-button" OnClick="btnTryWeather_Click" />
+                                </td>
                             </tr>
                             <tr>
                                 <td>Vihaan Patel</td>

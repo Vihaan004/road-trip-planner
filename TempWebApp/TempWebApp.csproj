@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin.aspx" />
+    <Content Include="CaptchaHandler.ashx" />
     <None Include="Connected Services\DistanceMatrixService\Service1.disco" />
     <None Include="Connected Services\DistanceMatrixService\configuration91.svcinfo" />
     <None Include="Connected Services\DistanceMatrixService\configuration.svcinfo" />
@@ -149,6 +150,13 @@
     <None Include="Connected Services\PlacesService\configuration91.svcinfo" />
     <None Include="Connected Services\PlacesService\configuration.svcinfo" />
     <None Include="Connected Services\PlacesService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\WeatherService\WeatherService.disco" />
+    <None Include="Connected Services\WeatherService\configuration91.svcinfo" />
+    <None Include="Connected Services\WeatherService\configuration.svcinfo" />
+    <None Include="Connected Services\WeatherService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -228,6 +236,13 @@
     <Content Include="Connected Services\PlacesService\TempWebApp.PlacesService.PlaceResults.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\WeatherService\WeatherService.wsdl" />
+    <None Include="Connected Services\WeatherService\WeatherService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\WeatherService\WeatherService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -258,6 +273,7 @@
     <Content Include="ServiceDirectory.aspx" />
     <Content Include="Staff.aspx" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Weather.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -271,12 +287,20 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CaptchaHandler.ashx.cs">
+      <DependentUpon>CaptchaHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\DistanceMatrixService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\PlacesService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\WeatherService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -362,6 +386,13 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Weather.aspx.cs">
+      <DependentUpon>Weather.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Weather.aspx.designer.cs">
+      <DependentUpon>Weather.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -391,6 +422,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DistanceMatrixService\" />
     <WCFMetadataStorage Include="Connected Services\PlacesService\" />
+    <WCFMetadataStorage Include="Connected Services\WeatherService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

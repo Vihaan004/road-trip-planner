@@ -1,11 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Posts>
-  <Post>
-    <PostId>1</PostId>
-    <Subject>Stop by Sedona on the way to Flagstaff</Subject>
-    <Description>You won't regret it.</Description>
-    <PostType>Tip</PostType>
-    <UserName>testing</UserName>
-    <PostDate>2025-04-26T11:06:10.6818268</PostDate>
-  </Post>
-</Posts>
+<Posts />
