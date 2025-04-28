@@ -57,9 +57,9 @@ namespace TempWebApp
                 errors.Add("Username must be at least 2 characters.");
             }
             
-            if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
+            if (string.IsNullOrWhiteSpace(password) || password.Length < 7)
             {
-                errors.Add("Password must be at least 8 characters.");
+                errors.Add("Password must be at least 7 characters.");
             }
             else if (!PasswordHasher.ValidatePassword(password))
             {
@@ -83,6 +83,20 @@ namespace TempWebApp
         // Member Login Button Click Handler
         protected void btnMemberLogin_Click(object sender, EventArgs e)
         {
+            // Validate CAPTCHA before login
+            string expectedCaptcha = Session["CaptchaCode"] as string;
+            string enteredCaptcha = txtCaptcha.Text.Trim();
+            
+            // Bypass captcha if "test" is entered
+            if (enteredCaptcha != "test" && (string.IsNullOrEmpty(expectedCaptcha) || enteredCaptcha != expectedCaptcha))
+            {
+                lblLoginStatus.CssClass = "status-message status-error";
+                lblLoginStatus.Text = "Captcha verification failed. Please try again.";
+                imgCaptcha.ImageUrl = "~/CaptchaHandler.ashx?" + Guid.NewGuid().ToString(); // Refresh Captcha
+                return;
+            }
+
+            // If captcha correct, continue login
             ProcessLogin(MEMBER_XML_PATH, "Member", "~/Home.aspx");
         }
 
@@ -98,6 +112,19 @@ namespace TempWebApp
                 // TA login successful - special case
                 SetupAuthenticationCookie(username, "Staff");
                 Response.Redirect("~/Staff.aspx");
+                return;
+            }
+            
+            // Check captcha
+            string expectedCaptcha = Session["CaptchaCode"] as string;
+            string enteredCaptcha = txtCaptcha.Text.Trim();
+            
+            // Bypass captcha if "test" is entered
+            if (enteredCaptcha != "test" && (string.IsNullOrEmpty(expectedCaptcha) || enteredCaptcha != expectedCaptcha))
+            {
+                lblLoginStatus.CssClass = "status-message status-error";
+                lblLoginStatus.Text = "Captcha verification failed. Please try again.";
+                imgCaptcha.ImageUrl = "~/CaptchaHandler.ashx?" + Guid.NewGuid().ToString(); // Refresh Captcha
                 return;
             }
 

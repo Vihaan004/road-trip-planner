@@ -124,6 +124,12 @@
                         <asp:Label ID="lblLoginPassword" runat="server" Text="Password" AssociatedControlID="txtLoginPassword" CssClass="form-label"></asp:Label>
                         <asp:TextBox ID="txtLoginPassword" runat="server" TextMode="Password" CssClass="form-control" autocomplete="current-password" ValidationGroup="LoginGroup"></asp:TextBox>
                     </div>
+                    <div class="mb-3">
+                        <asp:Label ID="lblCaptcha" runat="server" Text="Enter Captcha" CssClass="form-label"></asp:Label><br />
+                        <asp:Image ID="imgCaptcha" runat="server" ImageUrl="~/CaptchaHandler.ashx" style="margin-bottom:10px; cursor: pointer;" ToolTip="Click to refresh Captcha" /><br />
+                        <asp:TextBox ID="txtCaptcha" runat="server" CssClass="form-control" ValidationGroup="LoginGroup" placeholder="Enter Captcha"></asp:TextBox>
+                        <small class="text-muted">Enter 'test' to bypass captcha</small>
+                    </div>
                     <div class="mb-3 form-check">
                         <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="form-check-input" />
                         <asp:Label ID="lblRememberMe" runat="server" Text="Remember Me" AssociatedControlID="chkRememberMe" CssClass="form-check-label"></asp:Label>
@@ -179,4 +185,9 @@
             </asp:HyperLink>
         </div>
     </div>
+    <script type="text/javascript">
+    document.getElementById('<%= imgCaptcha.ClientID %>').onclick = function () {
+        this.src = 'CaptchaHandler.ashx?' + Math.random();
+    };
+    </script>
 </asp:Content>

@@ -48,24 +48,6 @@ namespace TempWebApp
                 // Set the staff name
                 lblStaffName.Text = User.Identity.Name;
 
-                // Set the account type
-                lblAccountType.Text = "Staff Account";
-
-                // Check for last login time
-                HttpCookie lastLoginCookie = Request.Cookies["LastLoginTime"];
-                if (lastLoginCookie != null)
-                {
-                    try
-                    {
-                        DateTime lastLogin = DateTime.Parse(lastLoginCookie.Value);
-                        lblLastLogin.Text = lastLogin.ToString("f"); // Long date and time format
-                    }
-                    catch
-                    {
-                        lblLastLogin.Text = "Unknown";
-                    }
-                }
-
                 // Store the current username in session for future use
                 Session[SESSION_USERNAME] = User.Identity.Name;
                 Session[SESSION_USER_TYPE] = "Staff";
@@ -505,24 +487,6 @@ namespace TempWebApp
             
             // Redirect to the default page
             Response.Redirect("~/Default.aspx");
-        }
-
-        protected void btnManageUsers_Click(object sender, EventArgs e)
-        {
-            // For future implementation - User management functionality
-            Response.Write("<script>alert('User management feature will be available in a future update.');</script>");
-        }
-
-        protected void btnViewReports_Click(object sender, EventArgs e)
-        {
-            // For future implementation - Reports functionality
-            Response.Write("<script>alert('Reports feature will be available in a future update.');</script>");
-        }
-
-        protected void btnServiceSettings_Click(object sender, EventArgs e)
-        {
-            // For future implementation - Service settings functionality
-            Response.Write("<script>alert('Service settings feature will be available in a future update.');</script>");
         }
 
         #endregion

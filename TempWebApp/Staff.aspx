@@ -144,7 +144,7 @@
     <div class="staff-container">
         <div class="staff-header">
             <div class="staff-welcome">Welcome to the Staff Portal, <asp:Label ID="lblStaffName" runat="server" Text="Staff Member"></asp:Label></div>
-            <div class="staff-subtitle">Access and manage road trip planning services</div>
+            <div class="staff-subtitle">Road Trip Community Forum Management</div>
             <div class="staff-actions">
                 <asp:LinkButton ID="lnkLogout" runat="server" CssClass="btn btn-outline-secondary" OnClick="lnkLogout_Click">
                     <i class="bi bi-box-arrow-right"></i> Logout
@@ -152,22 +152,6 @@
                 <asp:LinkButton ID="lnkServiceDirectory" runat="server" CssClass="btn btn-outline-primary" PostBackUrl="~/ServiceDirectory.aspx">
                     <i class="bi bi-grid"></i> Service Directory
                 </asp:LinkButton>
-            </div>
-        </div>
-
-        <div class="staff-card">
-            <div class="staff-card-title">Staff Dashboard</div>
-            <p>This is the restricted area for staff members. As a staff member, you have access to additional features and management tools.</p>
-            
-            <div class="staff-info">
-                <div class="staff-info-item">
-                    <div class="staff-info-label">Last Login</div>
-                    <asp:Label ID="lblLastLogin" runat="server" Text="First time login"></asp:Label>
-                </div>
-                <div class="staff-info-item">
-                    <div class="staff-info-label">Account Type</div>
-                    <asp:Label ID="lblAccountType" runat="server" Text="Staff"></asp:Label>
-                </div>
             </div>
         </div>
 

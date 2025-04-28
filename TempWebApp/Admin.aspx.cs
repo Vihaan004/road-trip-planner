@@ -127,9 +127,9 @@ namespace TempWebApp
             }
 
             // Password validation using PasswordHashLibrary
-            if (password.Length < 8 || !PasswordHasher.ValidatePassword(password))
+            if (password.Length < 7 || !PasswordHasher.ValidatePassword(password))
             {
-                ShowMessage("Password must be at least 8 characters long and contain both letters and numbers", false);
+                ShowMessage("Password must be at least 7 characters long and contain both letters and numbers", false);
                 return;
             }
 

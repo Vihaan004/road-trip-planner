@@ -7,6 +7,7 @@ using System.Web.UI.HtmlControls;
 using System.Data;
 using System.IO;
 using System.Xml.Linq;
+using TempWebApp.WeatherService;
 
 namespace TempWebApp
 {
@@ -26,6 +27,20 @@ namespace TempWebApp
 
         // Maximum number of stops allowed
         private const int MAX_STOPS = 10;
+
+        // Weather service client
+        private WeatherService.WeatherServiceClient _weatherServiceClient;
+        protected WeatherService.WeatherServiceClient weatherServiceClient 
+        {
+            get
+            {
+                if (_weatherServiceClient == null)
+                {
+                    _weatherServiceClient = new WeatherService.WeatherServiceClient();
+                }
+                return _weatherServiceClient;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -264,6 +279,7 @@ namespace TempWebApp
             DisplayRoute();
         }
 
+
         private void DisplayRoute()
         {
             var stops = GetRouteStops();
@@ -282,6 +298,7 @@ namespace TempWebApp
 
             var routeDetails = GetRouteDetails();
             double totalDistance = 0;
+            int totalMinutes = 0;
 
             // Add each stop to the UI
             for (int i = 0; i < stops.Count; i++)
@@ -298,6 +315,13 @@ namespace TempWebApp
                 stopTitle.InnerHtml = $"<strong>{stopLabel}:</strong> {stops[i]}";
                 stopInfo.Controls.Add(stopTitle);
 
+                // Add weather information
+                string weather = GetWeatherForCity(stops[i]);
+                HtmlGenericControl weatherInfo = new HtmlGenericControl("div");
+                weatherInfo.Attributes["class"] = "weather-info";
+                weatherInfo.InnerHtml = $"<span class='text-muted'>Weather:</span> <strong>{weather}</strong>";
+                stopInfo.Controls.Add(weatherInfo);
+
                 // Add leg information if this is not the last stop
                 if (i < stops.Count - 1)
                 {
@@ -305,6 +329,7 @@ namespace TempWebApp
                     if (routeDetails.TryGetValue(routeKey, out RouteDetail detail))
                     {
                         totalDistance += detail.DistanceMiles;
+                        totalMinutes += detail.TimeMinutes;
 
                         HtmlGenericControl legInfo = new HtmlGenericControl("div");
                         legInfo.Attributes["class"] = "leg-info";
@@ -336,6 +361,35 @@ namespace TempWebApp
 
             // Update total distance only
             lblTotalDistance.Text = $"{totalDistance:F2} miles";
+            
+            // Format the total time
+            string formattedTime;
+            if (totalMinutes < 60)
+            {
+                formattedTime = $"{totalMinutes} minute{(totalMinutes != 1 ? "s" : "")}";
+            }
+            else
+            {
+                int hours = totalMinutes / 60;
+                int minutes = totalMinutes % 60;
+                
+                if (minutes == 0)
+                {
+                    // Only show hours if there are no minutes
+                    formattedTime = $"{hours} hour{(hours != 1 ? "s" : "")}";
+                }
+                else
+                {
+                    // Show both hours and minutes
+                    formattedTime = $"{hours} hour{(hours != 1 ? "s" : "")} {minutes} minute{(minutes != 1 ? "s" : "")}";
+                }
+            }
+            // Display total time if our UI has the control for it
+            Label lblTotalTime = FindControl("lblTotalTime") as Label;
+            if (lblTotalTime != null)
+            {
+                lblTotalTime.Text = formattedTime;
+            }
         }
 
         private void RecalculateEntireRoute()
@@ -454,6 +508,22 @@ namespace TempWebApp
         private Dictionary<string, RouteDetail> GetRouteDetails()
         {
             return Session[SESSION_ROUTE_DETAILS] as Dictionary<string, RouteDetail> ?? new Dictionary<string, RouteDetail>();
+        }
+
+        private string GetWeatherForCity(string city)
+        {
+            try
+            {
+                // Call the GetWeatherData method to get weather for the city
+                string weather = weatherServiceClient.GetWeatherData(city);
+                return weather;
+            }
+            catch (Exception ex)
+            {
+                // Return a default message if there's an error
+                System.Diagnostics.Debug.WriteLine($"Error getting weather for {city}: {ex.Message}");
+                return "Weather data unavailable";
+            }
         }
 
         #endregion

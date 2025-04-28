@@ -152,8 +152,8 @@
                 </asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revPassword" runat="server" 
                     ControlToValidate="txtPassword"
-                    ValidationExpression=".{8,}" 
-                    ErrorMessage="Password must be at least 8 characters long" 
+                    ValidationExpression=".{7,}" 
+                    ErrorMessage="Password must be at least 7 characters long" 
                     CssClass="text-danger"
                     Display="Dynamic"
                     ValidationGroup="StaffCreateGroup">

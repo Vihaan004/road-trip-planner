@@ -118,6 +118,13 @@
         .staff-comment {
             border-left: 4px solid #0d6efd;
         }
+        .weather-info {
+            background-color: #e7f5ff;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 8px 0;
+            display: inline-block;
+        }
     </style>
 
     <div class="home-container">
@@ -186,6 +193,57 @@
                 <asp:Panel ID="pnlNoRoute" runat="server">
                     <div class="alert alert-secondary">
                         No route created yet. Enter origin and destination to start planning your trip.
+                    </div>
+                </asp:Panel>
+            </div>
+        </div>
+
+        <!-- Nearby Places Section -->
+        <h2 class="section-title">Find Nearby Places</h2>
+        <div class="card">
+            <div class="card-header">
+                Search for Restaurants & Gas Stations
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="txtLocation" class="form-label">Location:</label>
+                            <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" placeholder="Enter Location"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <asp:Button ID="btnSearchPlaces" runat="server" Text="Search Places" CssClass="btn btn-primary" OnClick="btnSearchPlaces_Click" />
+                    </div>
+                </div>
+
+                <asp:Panel ID="pnlPlacesResults" runat="server" Visible="false">
+                    <div class="row mt-4">
+                        <!-- Gas Stations Column -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Gas Stations</h5>
+                                </div>
+                                <div class="card-body">
+                                    <asp:BulletedList ID="lstGasStations" runat="server" CssClass="list-group list-group-flush" BulletStyle="NotSet">
+                                    </asp:BulletedList>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Restaurants Column -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Restaurants</h5>
+                                </div>
+                                <div class="card-body">
+                                    <asp:BulletedList ID="lstRestaurants" runat="server" CssClass="list-group list-group-flush" BulletStyle="NotSet">
+                                    </asp:BulletedList>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </asp:Panel>
             </div>
@@ -275,55 +333,6 @@
             </div>
         </div>
 
-        <!-- Nearby Places Section -->
-        <h2 class="section-title">Find Nearby Places</h2>
-        <div class="card">
-            <div class="card-header">
-                Search for Restaurants & Gas Stations
-            </div>
-            <div class="card-body">
-                <div class="row mb-3">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="txtLocation" class="form-label">Location:</label>
-                            <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" placeholder="Enter Location"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <asp:Button ID="btnSearchPlaces" runat="server" Text="Search Places" CssClass="btn btn-primary" OnClick="btnSearchPlaces_Click" />
-                    </div>
-                </div>
-
-                <asp:Panel ID="pnlPlacesResults" runat="server" Visible="false">
-                    <div class="row mt-4">
-                        <!-- Gas Stations Column -->
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0">Gas Stations</h5>
-                                </div>
-                                <div class="card-body">
-                                    <asp:BulletedList ID="lstGasStations" runat="server" CssClass="list-group list-group-flush" BulletStyle="NotSet">
-                                    </asp:BulletedList>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Restaurants Column -->
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0">Restaurants</h5>
-                                </div>
-                                <div class="card-body">
-                                    <asp:BulletedList ID="lstRestaurants" runat="server" CssClass="list-group list-group-flush" BulletStyle="NotSet">
-                                    </asp:BulletedList>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </asp:Panel>
-            </div>
-        </div>
+        
     </div>
 </asp:Content>
