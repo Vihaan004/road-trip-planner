@@ -12,16 +12,35 @@
   <wsdl:message name="IWeatherService_GetGoogleWeather_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetGoogleWeatherResponse" />
   </wsdl:message>
+  <wsdl:message name="IWeatherService_GetWeatherData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWeatherData" />
+  </wsdl:message>
+  <wsdl:message name="IWeatherService_GetWeatherData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWeatherDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWeatherService">
     <wsdl:operation name="GetGoogleWeather">
       <wsdl:input wsaw:Action="http://tempuri.org/IWeatherService/GetGoogleWeather" message="tns:IWeatherService_GetGoogleWeather_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWeatherService/GetGoogleWeatherResponse" message="tns:IWeatherService_GetGoogleWeather_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWeatherData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWeatherService/GetWeatherData" message="tns:IWeatherService_GetWeatherData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWeatherService/GetWeatherDataResponse" message="tns:IWeatherService_GetWeatherData_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IWeatherService" type="tns:IWeatherService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetGoogleWeather">
       <soap:operation soapAction="http://tempuri.org/IWeatherService/GetGoogleWeather" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeatherData">
+      <soap:operation soapAction="http://tempuri.org/IWeatherService/GetWeatherData" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

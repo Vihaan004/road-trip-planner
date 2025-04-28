@@ -363,7 +363,7 @@ namespace TempWebApp
         {
             try
             {
-                string weather = weatherServiceClient.getWeather(city);
+                string weather = weatherServiceClient.GetWeatherData(city);
                 return weather;
             }
             catch (Exception ex)

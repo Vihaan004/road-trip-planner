@@ -16,7 +16,7 @@ namespace WeatherService
             return $"{weather1}\n\n{weather2}";
         }
 
-        private string GetWeatherData(string location)
+        public string GetWeatherData(string location)
         {
             try
             {

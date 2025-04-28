@@ -20,6 +20,12 @@ namespace TempWebApp.WeatherService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetGoogleWeather", ReplyAction="http://tempuri.org/IWeatherService/GetGoogleWeatherResponse")]
         System.Threading.Tasks.Task<string> GetGoogleWeatherAsync(string location1, string location2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetWeatherData", ReplyAction="http://tempuri.org/IWeatherService/GetWeatherDataResponse")]
+        string GetWeatherData(string location);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetWeatherData", ReplyAction="http://tempuri.org/IWeatherService/GetWeatherDataResponse")]
+        System.Threading.Tasks.Task<string> GetWeatherDataAsync(string location);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace TempWebApp.WeatherService {
         
         public System.Threading.Tasks.Task<string> GetGoogleWeatherAsync(string location1, string location2) {
             return base.Channel.GetGoogleWeatherAsync(location1, location2);
+        }
+        
+        public string GetWeatherData(string location) {
+            return base.Channel.GetWeatherData(location);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetWeatherDataAsync(string location) {
+            return base.Channel.GetWeatherDataAsync(location);
         }
     }
 }
