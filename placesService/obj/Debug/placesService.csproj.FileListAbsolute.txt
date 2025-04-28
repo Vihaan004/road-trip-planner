@@ -18,3 +18,13 @@ C:\Users\Vihaan\source\repos\Assignment_5\placesService\obj\Debug\placesService.
 C:\Users\Vihaan\source\repos\Assignment_5\placesService\obj\Debug\placesSe.C175DD16.Up2Date
 C:\Users\Vihaan\source\repos\Assignment_5\placesService\obj\Debug\placesService.dll
 C:\Users\Vihaan\source\repos\Assignment_5\placesService\obj\Debug\placesService.pdb
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\bin\placesService.dll.config
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\bin\placesService.dll
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\bin\placesService.pdb
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\bin\Newtonsoft.Json.dll
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\bin\Newtonsoft.Json.xml
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\obj\Debug\placesService.csproj.AssemblyReference.cache
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\obj\Debug\placesService.csproj.CoreCompileInputs.cache
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\obj\Debug\placesSe.C175DD16.Up2Date
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\obj\Debug\placesService.dll
+C:\Users\Aryan\Desktop\Classes\Spring 25\CSE445\Assignment 5\road-trip-planner\placesService\obj\Debug\placesService.pdb

@@ -125,6 +125,13 @@
         .staff-comment {
             border-left: 4px solid #0d6efd;
         }
+        .weather-info {
+            background-color: #e7f5ff;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 8px 0;
+            display: inline-block;
+        }
     </style>
 
     <div class="home-container">

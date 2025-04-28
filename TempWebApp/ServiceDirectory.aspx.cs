@@ -26,5 +26,11 @@ namespace TempWebApp
             // Navigate to the Hashing.aspx page
             Response.Redirect("~/Hashing.aspx");
         }
+
+        protected void btnTryWeather_Click(object sender, EventArgs e)
+        {
+            // Navigate to the Weather.aspx page
+            Response.Redirect("~/Weather.aspx");
+        }
     }
 }

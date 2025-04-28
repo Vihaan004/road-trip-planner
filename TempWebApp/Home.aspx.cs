@@ -7,6 +7,7 @@ using System.Web.UI.HtmlControls;
 using System.Data;
 using System.IO;
 using System.Xml.Linq;
+using TempWebApp.WeatherService;
 
 namespace TempWebApp
 {
@@ -26,6 +27,20 @@ namespace TempWebApp
 
         // Maximum number of stops allowed
         private const int MAX_STOPS = 10;
+
+        // Weather service client
+        private WeatherService.WeatherServiceClient _weatherServiceClient;
+        protected WeatherService.WeatherServiceClient weatherServiceClient 
+        {
+            get
+            {
+                if (_weatherServiceClient == null)
+                {
+                    _weatherServiceClient = new WeatherService.WeatherServiceClient();
+                }
+                return _weatherServiceClient;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -344,6 +359,19 @@ namespace TempWebApp
             }
         }
 
+        private string GetWeatherForCity(string city)
+        {
+            try
+            {
+                string weather = weatherServiceClient.getWeather(city);
+                return weather;
+            }
+            catch (Exception ex)
+            {
+                return "Weather data unavailable";
+            }
+        }
+
         private void DisplayRoute()
         {
             var stops = GetRouteStops();
@@ -378,6 +406,13 @@ namespace TempWebApp
                 HtmlGenericControl stopTitle = new HtmlGenericControl("div");
                 stopTitle.InnerHtml = $"<strong>{stopLabel}:</strong> {stops[i]}";
                 stopInfo.Controls.Add(stopTitle);
+
+                // Add weather information
+                string weather = GetWeatherForCity(stops[i]);
+                HtmlGenericControl weatherInfo = new HtmlGenericControl("div");
+                weatherInfo.Attributes["class"] = "weather-info";
+                weatherInfo.InnerHtml = $"<span class='text-muted'>Weather:</span> <strong>{weather}</strong>";
+                stopInfo.Controls.Add(weatherInfo);
 
                 // Add leg information if this is not the last stop
                 if (i < stops.Count - 1)

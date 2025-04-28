@@ -83,6 +83,17 @@ namespace TempWebApp
         // Member Login Button Click Handler
         protected void btnMemberLogin_Click(object sender, EventArgs e)
         {
+            // ✅ Validate CAPTCHA before login
+            string expectedCaptcha = Session["CaptchaCode"] as string;
+            if (string.IsNullOrEmpty(expectedCaptcha) || txtCaptcha.Text.Trim() != expectedCaptcha)
+            {
+                lblLoginStatus.CssClass = "status-message status-error";
+                lblLoginStatus.Text = "Captcha verification failed. Please try again.";
+                imgCaptcha.ImageUrl = "~/CaptchaHandler.ashx?" + Guid.NewGuid().ToString(); // Refresh Captcha
+                return;
+            }
+
+            // If captcha correct, continue login
             ProcessLogin(MEMBER_XML_PATH, "Member", "~/Home.aspx");
         }
 
