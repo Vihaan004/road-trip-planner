@@ -1,7 +1,3 @@
-Here's a suggested README file tailored to your "Road Trip Planner" web application:
-
----
-
 # Road Trip Planner
 
 A web-based application for planning road trips, built using **JavaScript**, **C#**, and **ASP.NET**. This project was developed as part of the CSE445 coursework to demonstrate skills in full-stack development and route optimization.
